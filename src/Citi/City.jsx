@@ -1,18 +1,23 @@
 import {useState, useEffect} from "react";
-import {getCities,  addcity } from "./api";
+import {getCities,  addcity,deletecity } from "./api";
 import Addcity from "./Addcity";
 import axios from "axios";
 function Citi() {
     const[data, setData]=useState([]);
     const [page, setPage]=useState(1);
     const [totalCount, setTotalCount]= useState(0);
+  
+   const handelgetcity= (page)=>{
+    getCities({page:page,limit:5,sort:"population", order:"asc"})
+    .then((res)=>{
+        setData(res.data);
+        setTotalCount(Number(res.headers["x-total-count"]));
+    })
+    .catch((err)=>console.log(err));
+   }
+
     useEffect(()=>{
-        getCities({page:page,limit:5,sort:"population", order:"asc"})
-        .then((res)=>{
-            setData(res.data);
-            setTotalCount(Number(res.headers["x-total-count"]));
-        })
-        .catch((err)=>console.log(err));
+        handelgetcity(page)
     }, [page]);
 
 
@@ -22,6 +27,11 @@ const handelpagechange= (val)=>{
 }
 const handelAddcity = (data)=>{
   addcity(data);
+  handelAddcity(page)
+}
+const handeldeletecity=(id)=>{
+    deletecity(id) 
+    handelgetcity(page);
 }
 return ( 
     <>
@@ -39,7 +49,10 @@ return (
     console.log(city.name);
     return (
         <div id={city.id}>
+            <p>
             {city.name} - {city.population}
+            </p>
+            <button onClick={()=>handeldeletecity(city.id)}>Delete</button>
         </div>
     );
 })}

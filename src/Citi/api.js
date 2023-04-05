@@ -20,3 +20,7 @@ export const addcity= (data)=>{
     country:data.country
    });
 };
+
+export const deletecity=(id)=>{
+   return axios.delete(`http://localhost:3000/cities${id}`);
+}
