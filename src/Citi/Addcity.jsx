@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Addcity(){
+function Addcity({handelAddcity}){
     //name , population coun try
     const [formState, setForm]=useState({
         name:"",
@@ -8,12 +8,18 @@ function Addcity(){
         country:"india"
     });
     const handelChange=(e)=>{
-     setForm({...formState, [e.target.name]:e.target.value});
-     console.log(formState);
+        const val=e.target.type==="number"?Number(e.target.value):e.target.value;
+     setForm({...formState, [e.target.name]:val});
+    
+    };
+    const handelsubmit= (e)=>{
+        e.preventDefault();
+        handelAddcity(formState );
+        console.log(formState)
     };
     return (
         <>
-        <form>
+        <form onSubmit={handelsubmit}>
             <div>
                 <input name='name'
                 type="text"
@@ -33,6 +39,9 @@ function Addcity(){
                 
                 
                 />
+            </div>
+            <div>
+               <input type="submit" value="submit"/>
             </div>
         </form>
         </>

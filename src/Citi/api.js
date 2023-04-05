@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const getCities = (params={}) => {
+export const getCities = (params={}) => {
   return axios.get(`http://localhost:3000/cities`, {
     params: {
       _page: params.page,
@@ -13,4 +13,10 @@ const getCities = (params={}) => {
 };
 
 
-export default getCities;
+export const addcity= (data)=>{
+   return axios.post(`http://localhost:3000/cities`,{
+    name:data.name,
+    population:data.population,
+    country:data.country
+   });
+};

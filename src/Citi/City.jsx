@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
-import getCities from "./api";
+import {getCities,  addcity } from "./api";
 import Addcity from "./Addcity";
-
+import axios from "axios";
 function Citi() {
     const[data, setData]=useState([]);
     const [page, setPage]=useState(1);
@@ -20,10 +20,13 @@ const handelpagechange= (val)=>{
     const updatePage= page+val;
     setPage(updatePage);
 }
-return (
+const handelAddcity = (data)=>{
+  addcity(data);
+}
+return ( 
     <>
       <div>
-        <Addcity/>
+        <Addcity handelAddcity={handelAddcity}/>
          <h1>Citis</h1>
          {/* {data.map((city)=>{
             console.log(city.name);
