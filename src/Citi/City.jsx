@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import getCities from "./api";
+import Addcity from "./Addcity";
 
 function Citi() {
     const[data, setData]=useState([]);
@@ -22,6 +23,7 @@ const handelpagechange= (val)=>{
 return (
     <>
       <div>
+        <Addcity/>
          <h1>Citis</h1>
          {/* {data.map((city)=>{
             console.log(city.name);
@@ -38,7 +40,7 @@ return (
         </div>
     );
 })}
-
+ 
 
          <button disabled={page===1}
           onClick={()=>

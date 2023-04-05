@@ -1,11 +1,5 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "title": "learn axios",
-      "status": false
-    }
-  ],
+  
 
   "cities": [
     {
